@@ -856,12 +856,12 @@ Warning message:
 > mean(df1[["Ozone1"]])
 [1] NA
 Warning message:
-  In mean.default(df1[["Ozone1"]]) :
+  In mean.default(df1[["Ozone"]]) :
   argument is not numeric or logical: returning NA
-> mean(df1[["Ozone1"]])
+> mean(df1[["Ozone"]])
 [1] NA
 Warning message:
-  In mean.default(df1[["Ozone1"]]) :
+  In mean.default(df1[["Ozone"]]) :
   argument is not numeric or logical: returning NA
 > mean(df1[["Wind"]])
 [1] 9.957516
