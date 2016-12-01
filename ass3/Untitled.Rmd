@@ -1,0 +1,179 @@
+---
+title: "Home Work 3"
+author: "Hari"
+date: "30 November 2016"
+output: word_document
+---
+Q1.
+```{r}
+hdd <- read.csv("hd.csv", header = TRUE)
+
+summary(hdd)
+```
+
+
+
+Q2
+```{r}
+hist(hdd$Q1)
+  hist(hdd$Q1,     main="Age Analysis",     xlab="Age",     border="blue",     col="green")
+
+```
+```{r}
+hist(hdd$Q2)
+  hist(hdd$Q2,     main="Shoe size Analysis",     xlab="Shoe Size",     border="blue",     col="red")
+
+```
+```{r}
+hist(hdd$Q3)
+  hist(hdd$Q3,     main="Sibling Analysis",     xlab="No of Siblings",     border="black",     col="blue")
+
+```
+```{r}
+hist(hdd$Q4)
+  hist(hdd$Q4,     main="Distance from Datrmouth",     xlab="Distance",     border="black",     col="pink")
+
+```
+```{r}
+hist(hdd$Q5)
+  hist(hdd$Q5,     main="Sleep Time Analysis",     xlab="Sleep Time",     border="black",     col="yellow")
+
+```
+```{r}
+hist(hdd$Q6)
+  hist(hdd$Q6,     main="Pet Lover Analysis",     xlab="Pets Lover",     border="black",     col="violet")
+
+```
+```{r}
+hist(hdd$Q7)
+  hist(hdd$Q7,     main="Introvert/Extrovert Analysis",     xlab="Introvert/Extrovert",     border="black",     col="violet")
+
+```
+
+```{r}
+hist(hdd$Q8)
+  hist(hdd$Q8,     main="Cooking Analysis",     xlab="Cooking?",     border="black",     col="brown")
+
+```
+
+```{r}
+hist(hdd$Q9)
+  hist(hdd$Q9,     main="Money Spending Analysis",     xlab="Spending?",     border="blue",     col="black")
+
+```
+```{r}
+hist(hdd$Q10)
+  hist(hdd$Q10,     main="Phone usage Analysis",     xlab="Phone usage?",     border="black",     col="blue")
+
+```
+```{r}
+hist(hdd$Q11)
+  hist(hdd$Q11,     main="App Analysis",     xlab="No of apps?",     border="black",     col="brown")
+
+```
+
+```{r}
+hist(hdd$Q13)
+  hist(hdd$Q13,     main="Social Network Analysis",     xlab="Friends on SSN",     border="black",     col="pink")
+
+```
+
+```{r}
+hist(hdd$Q14)
+  hist(hdd$Q14,     main="Mac Fan Analysis",     xlab="Mac fan?",     border="black",     col="blue")
+hist(hdd$Q15)
+  hist(hdd$Q15,     main="CS love Analysis",     xlab="CS love",     border="black",     col="red")
+  hist(hdd$Q16)
+  hist(hdd$Q16,     main="Feeling_Umass Analysis",     xlab="Feeling_Umass?",     border="black",     col="green")
+  hist(hdd$Q17)
+  hist(hdd$Q17,     main="Visiting Analysis",     xlab="Countries Visited",     border="black",     col="brown")
+  hist(hdd$Q20)
+  hist(hdd$Q20,     main="Preferred Temp Analysis",     xlab="Temperature",     border="black",     col="red")
+  hist(hdd$Q21)
+  hist(hdd$Q21,     main="Spicy  Analysis",     xlab="Amount of spice",     border="black",     col="blue")
+  hist(hdd$Q22)
+  hist(hdd$Q22,     main="Job Experience Analysis",     xlab=" Experience",     border="red",     col="black")
+  hist(hdd$Q27)
+  hist(hdd$Q27,     main="Milage Analysis",     xlab=" Milage",     border="blue",     col="pink")
+```
+
+```{r}
+pairs(~Q1+Q2, data = hdd,  main = "Data comparison", pch= 21 , bg = c("blue", "red", "green"))
+pairs(~Q5+Q6, data = hdd,  pch= 21, bg = c("blue", "red", "blue"))
+pairs(~Q7+Q8, data = hdd,  pch= 21, bg = c("blue", "red", "black"))
+pairs(~Q9+Q10, data = hdd,  pch= 21, bg = c("blue", "blue", "green"))
+pairs(~Q11+Q12, data = hdd,  pch= 21, bg = c("blue", "blue", "brown"))
+pairs(~Q21+Q22, data = hdd,  pch= 21, bg = c("blue", "black", "brown"))
+pairs(~Q23+Q24, data = hdd,  pch= 21, bg = c("blue", "green", "blue"))
+pairs(~Q26+Q27+Q24+Q19, data = hdd,  main= "Scatterplot",pch= 21, bg = c("blue", "red", "green"))
+
+
+```
+```{r}
+library(MASS)
+pair1 <- data.frame(hdd$Q1, hdd$Q2, hdd$Q3, hdd$Q4)
+
+parcoord(pair1, var.label = TRUE, col = rainbow(length(pair1[,1]))) #c("red","green", "blue"))
+
+
+```
+
+```{r}
+
+
+t<-data.frame(hdd$Q6, hdd$Q7, hdd$Q8, hdd$Q9)
+#colnames("Pet lover", "Introvert/Extrovert", "Cook", " Money Saver")
+#parcoord(t, col=rainbow(length(t[,1])), var.label=TRUE)
+
+parcoord(t, var.label = TRUE, col = rainbow(length(t[,1]))) 
+
+#c("red","green", "blue") )
+
+
+```
+
+```{r}
+t1<-data.frame(hdd$Q20, hdd$Q22, hdd$Q23, hdd$Q27)
+parcoord(t, var.label = TRUE, col = rainbow(length(t1[,1]))) 
+
+```
+
+```{r}
+row.names(hdd) <- hdd[,1]
+hdd1 <- hdd[,-1]
+normalize <- scale(hdd1, scale=TRUE)
+head(normalize)
+```
+
+Q3
+
+```{r}
+aa <- dist(normalize, method = "euclidean", diag = FALSE, upper = FALSE)
+print(aa)
+#as.dist(normalize, diag = FALSE, upper = FALSE)
+
+```
+Q4. 
+
+```{r}
+fit <- cmdscale(aa, k=2)
+#print(fit)
+
+plot(fit,type="n")
+
+text(fit[,1], fit[,2], labels(aa), col = rainbow(length(fit[,1])))
+```
+
+```{r}
+
+fi <- prcomp(hdd1)
+summary(fi) # print variance accounted for 
+loadings(fi) # pc loadings 
+plot(fi,type="lines") # scree plot 
+fi$scores # the principal components
+biplot(fi)
+
+```
+
+
+
